@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+        <title>affine-viewer demo</title>
+    </head>
+    <body>
+        <canvas id="renderCanvas" width="512" height="512"></canvas>
+        <script src="https://cdn.jsdelivr.net/npm/lazy-renderer/dist/lazy-renderer.iife.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/affine-viewer/dist/affine-viewer.iife.min.js"></script>
+        <script>
+            // Get the canvas element.
+            const renderCanvas = document.getElementById("renderCanvas");
+
+            // Create the affineViewer object.
+            const affineViewer = new AffineViewer.AffineViewer(renderCanvas, geometryName => {
+                // Load geometry...
+            });
+
+            requestAnimationFrame(drawScene);
+
+            function drawScene(timestamp) {
+                // Draw scene.
+                affineViewer.drawScene(["my-point", "my-curve", "my-surface"]);
+
+                // Request next animation frame.
+                requestAnimationFrame(drawScene);
+            }
+        </script>
+    </body>
+</html>
