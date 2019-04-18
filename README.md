@@ -1,4 +1,4 @@
-# lazy-renderer
+# affine-viewer
 A viewer for points, curves and surfaces under affine transformations.
 
 ## Demo
@@ -28,16 +28,13 @@ const { AffineViewer } = require("affine-viewer");
 
 ## Browser
 
-To use this library in a browser:
+To use this library in a browser through IIFE:
 ```html
-<canvas id="renderCanvas" width="512" height="512"></canvas>
 <script src="https://cdn.jsdelivr.net/npm/lazy-renderer/dist/lazy-renderer.iife.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/affine-viewer/dist/affine-viewer.iife.min.js"></script>
 <script>
-    const renderCanvas = document.getElementById("renderCanvas");
-    const affineViewer = new AffineViewer.AffineViewer(renderCanvas, geometryName => {
-        // Load geometry...
-    });
+    const { AffineViewer } = window.AffineViewer;
+    // ...
 </script>
 ```
 
