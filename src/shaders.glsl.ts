@@ -2,29 +2,19 @@ export const VERTEX_SHADER = `#version 300 es
 
 precision mediump float;
 
-in vec4 vertex_position;
-in vec2 vertex_texCoord;
-in vec2 vertex_ssDisplacement;
+in vec4 vertexPosition;
 
-uniform vec2 resolution;
+uniform vec2 viewportSize;
+uniform mat4 affineTransformation;
+uniform uint geometryType;
+uniform uint textureMapping;
+uniform mat4 cameraMatrix;
 
-uniform vec3 camera_position;
-uniform mat4 camera_rotation;
-uniform mat4 camera_inverse_rotation;
-uniform float camera_zoom;
-uniform float camera_far_clip;
-uniform float camera_vertical_scale;
-
-out vec2 texCoord;
+out vec3 textureCoordinates;
 
 void main() {
-  mat4 orthographic_projection = mat4(2.0 * camera_zoom / resolution.x,                              0.0,                  0.0, 0.0,
-                                                                   0.0, 2.0 * camera_zoom / resolution.y,                  0.0, 0.0,
-                                                                   0.0,                              0.0, -1.0/camera_far_clip, 0.0,
-                                                                   0.0,                              0.0,                  0.0, 1.0);
-
-  gl_Position = (orthographic_projection * camera_rotation * ((vertex_position - vec4(camera_position, 0.0)) * vec4(1.0, camera_vertical_scale, 1.0, 1.0))) + vec4(vertex_ssDisplacement, 0.0, 0.0);
-  texCoord = vertex_texCoord;
+  gl_Position = affineTransformation * vertexPosition;
+  textureCoordinates = gl_Position.xyz;
 }
 `;
 
@@ -32,12 +22,12 @@ export const FRAGMENT_SHADER = `#version 300 es
 
 precision mediump float;
 
-in vec2 texCoord;
+in vec3 textureCoordinates;
 
-uniform vec2 resolution;
-uniform vec4 color;
-uniform bool has_texture;
-uniform sampler2D tex;
+uniform sampler2D diffuse2D;
+uniform sampler3D diffuse3D;
+
+uniform uint textureMapping;
 
 out vec4 fragment_color;
 

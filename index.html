@@ -8,17 +8,19 @@
     <body>
         <canvas id="renderCanvas" width="512" height="512"></canvas>
         <script src="https://cdn.jsdelivr.net/npm/lazy-renderer/dist/lazy-renderer.iife.min.js"></script>
-        <script src="./dist/affine-viewer.iife.min.js"></script>
+        <script src="./dist/affine-viewer.iife.js"></script>
         <script>
-            const { AffineViewer } = window.AffineViewer;
+            var { AffineViewer } = window.AffineViewer;
 
             // Get the canvas element.
             const renderCanvas = document.getElementById("renderCanvas");
 
-            // Create the AffineViewer instance.
-            const affineViewer = new AffineViewer(renderCanvas, geometryName => {
+            // Setup affine-viewer.
+            const affineViewer = new AffineViewer(renderCanvas,
+            geometryName => {
                 // Load geometry...
-            }, textureName => {
+            },
+            textureName => {
                 // Load texture...
             });
 

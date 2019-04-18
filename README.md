@@ -33,7 +33,7 @@ To use this library in a browser through IIFE:
 <script src="https://cdn.jsdelivr.net/npm/lazy-renderer/dist/lazy-renderer.iife.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/affine-viewer/dist/affine-viewer.iife.min.js"></script>
 <script>
-    const { AffineViewer } = window.AffineViewer;
+    var { AffineViewer } = window.AffineViewer;
     // ...
 </script>
 ```

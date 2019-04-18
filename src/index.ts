@@ -93,6 +93,7 @@ export class AffineViewer {
 
     private provideResource(resourceType: ResourceType, resourceName: string): void {
         // TODO
+        console.log(ResourceType[resourceType], resourceName);
     }
 
     public registerGeometry(
@@ -222,6 +223,7 @@ export class AffineViewer {
         }
 
         const uniforms = new Map<string, ArrayBufferView>();
+        uniforms.set('viewportSize', new Uint32Array([this.canvas.width, this.canvas.height]));
         uniforms.set('affineTransformation', geometry.affineTransformation);
         uniforms.set('geometryType', new Uint32Array([geometry.type]));
         uniforms.set('textureMapping', new Uint32Array([texture.mapping]));
